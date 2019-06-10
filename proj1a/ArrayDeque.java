@@ -23,7 +23,7 @@ public class ArrayDeque<T> {
         this(other.size());
 
         for (int i = 0; i < other.size(); i++) {
-            this.addLast((T)other.get(i));
+            this.addLast((T) other.get(i));
         }
     }
 
@@ -55,14 +55,13 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-       if (size == capacity) {
-           //resize
-           this.resize(2);
+        if (size == capacity) {
+            this.resize(2);
 
-       }
-       array[last] = item;
-       last = (capacity + last + 1) % capacity;
-       size++;
+        }
+        array[last] = item;
+        last = (capacity + last + 1) % capacity;
+        size++;
     }
 
 
@@ -109,6 +108,7 @@ public class ArrayDeque<T> {
     }
 
     private void resize(double ratio) {
+
         int recap = (int) (capacity * ratio);
         T[] temp = (T[]) new Object[recap];
 
@@ -117,7 +117,7 @@ public class ArrayDeque<T> {
         }
         this.capacity = recap;
         this.first = this.capacity - 1;
-        this.last = this.size - 1;
+        this.last = this.size ;
         this.array = temp;
     }
 
@@ -135,15 +135,12 @@ public class ArrayDeque<T> {
 
 
     public static void main(String[] args) {
-        ArrayDeque<String> queue = new ArrayDeque();
-        queue.addFirst("a5");
-        queue.addFirst("a4");
-        queue.addFirst("a3");
-        queue.addLast("a6");
-        queue.removeFirst();
-        queue.removeLast();
-
+        ArrayDeque<Integer> queue = new ArrayDeque();
+        for (int i = 0; i < 36; i++) {
+            queue.addLast(i);
+        }
         System.out.println(queue);
+        System.out.println(queue.get(7));
 
     }
 

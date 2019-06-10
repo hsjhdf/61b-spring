@@ -1,17 +1,17 @@
-public class LinkedListDeque<T>{
+public class LinkedListDeque<T> {
 
     private class IntNode {
-        public T item;
-        public IntNode next;
-        public IntNode before;
+        private T item;
+        private IntNode next;
+        private IntNode before;
 
-        public IntNode(T item, IntNode before, IntNode next) {
+        IntNode(T item, IntNode before, IntNode next) {
             this.item = item;
             this.next = next;
             this.before = before;
         }
 
-        public IntNode() {
+        IntNode() {
             this.next = this;
             this.before = this;
         }
@@ -35,7 +35,7 @@ public class LinkedListDeque<T>{
     public LinkedListDeque(LinkedListDeque other) {
         sentinel = new IntNode();
 
-        for (int i =0; i < other.size(); i++) {
+        for (int i = 0; i < other.size(); i++) {
             this.addLast((T) other.get(i));
 
         }
@@ -64,6 +64,7 @@ public class LinkedListDeque<T>{
     }
 
     public T removeFirst() {
+        if (sentinel.next != sentinel) {
         IntNode temp = sentinel.next;
         sentinel.next.next.before = sentinel;
         sentinel.next = sentinel.next.next;
@@ -71,10 +72,14 @@ public class LinkedListDeque<T>{
         temp.before = null;
         size--;
         return temp.item;
+        } else {
+            return null;
+        }
     }
 
 
     public T removeLast() {
+        if (sentinel.next != sentinel) {
         IntNode temp = sentinel.before;
         sentinel.before.before.next = sentinel;
         sentinel.before = sentinel.before.before;
@@ -82,6 +87,9 @@ public class LinkedListDeque<T>{
         temp.before = null;
         temp.next = null;
         return temp.item;
+        } else {
+            return null;
+        }
     }
 
     public T get(int index) {
